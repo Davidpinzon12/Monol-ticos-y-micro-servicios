@@ -1,0 +1,17 @@
+GESTOR DE ALQUILER - MICROSERVICIOS (Slim + Eloquent, MVC) + FRONTEND (HTML + CSS + JavaScript)
+
+Requisitos: XAMPP con MySQL encendido, base alquiler_vehiculos_db ya importada, Composer instalado.
+
+BACKEND
+1) Extrae esta carpeta donde quieras (ej. C:\ms_alquiler). Los servicios NO van en htdocs.
+2) Doble clic en instalar.bat (composer install en los 3 servicios).
+3) Doble clic en iniciar.bat (3 ventanas: 8001 vehiculos, 8002 clientes, 8003 reservas). Déjalas abiertas.
+
+FRONTEND
+4) Copia la carpeta "frontend" dentro de C:\xampp\htdocs (por ejemplo como C:\xampp\htdocs\gestor) y abre http://localhost/gestor/
+   (también puedes abrir frontend\index.html con doble clic).
+
+ARQUITECTURA MVC en cada servicio:  app/Models (Eloquent), app/Controllers, app/Views (respuesta JSON), app/rutas.php
+Token del middleware: Authorization: Bearer 12345
+Códigos HTTP: 200 OK, 201 creado, 401 sin token, 404 no existe, 409 conflicto (cruce de reservas/mantenimiento), 422 datos inválidos.
+Pruebas por consola: PRUEBAS.txt
