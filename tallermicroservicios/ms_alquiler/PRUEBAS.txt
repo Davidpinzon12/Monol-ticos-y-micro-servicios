@@ -1,0 +1,24 @@
+Abre "Símbolo del sistema" (cmd, no PowerShell) y prueba en este orden. Todas llevan el token del middleware.
+
+1) Salud (sin token): abre http://127.0.0.1:8001/  http://127.0.0.1:8002/  http://127.0.0.1:8003/
+
+2) Crear vehículo:
+curl.exe -X POST http://127.0.0.1:8001/vehiculos -H "Authorization: Bearer 12345" -H "Content-Type: application/json" -d "{\"marca\":\"Mazda\",\"modelo\":\"3\",\"anio\":2022,\"categoria\":\"Economico\"}"
+
+3) Crear cliente:
+curl.exe -X POST http://127.0.0.1:8002/clientes -H "Authorization: Bearer 12345" -H "Content-Type: application/json" -d "{\"nombre\":\"Ana Perez\",\"telefono\":\"3001234567\",\"correo\":\"ana@mail.com\",\"numero_licencia\":\"LIC123\"}"
+
+4) Reservar (usa los id que devolvieron los pasos 2 y 3; el servicio de reservas consulta a los otros dos):
+curl.exe -X POST http://127.0.0.1:8003/reservas -H "Authorization: Bearer 12345" -H "Content-Type: application/json" -d "{\"cliente_id\":1,\"vehiculo_id\":1,\"fecha_inicio\":\"2026-11-17\",\"fecha_fin\":\"2026-11-20\"}"
+
+5) Ver el vehículo (debe estar "alquilado"):
+curl.exe http://127.0.0.1:8001/vehiculos/1 -H "Authorization: Bearer 12345"
+
+6) Repetir el paso 4: debe responder 409 (se cruza). Sin el token: 401.
+
+7) Devolver:
+curl.exe -X PUT http://127.0.0.1:8003/reservas/1/devolver -H "Authorization: Bearer 12345"
+
+8) Historial y disponibilidad:
+curl.exe "http://127.0.0.1:8003/reservas?vehiculo_id=1" -H "Authorization: Bearer 12345"
+curl.exe "http://127.0.0.1:8003/disponibilidad?desde=2026-11-17&hasta=2026-11-20" -H "Authorization: Bearer 12345"
