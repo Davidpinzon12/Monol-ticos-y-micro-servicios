@@ -1,4 +1,0 @@
-1) Extrae TODO el contenido de este ZIP directamente dentro de C:\xampp\htdocs\NOMBRE_DEL_TRABAJO
-   (debe quedar index.php al abrir esa carpeta, sin otra carpeta en medio).
-2) Enciende Apache y MySQL en XAMPP e importa bd\alquiler_vehiculos_db.sql en phpMyAdmin.
-3) Abre http://localhost/NOMBRE_DEL_TRABAJO/
